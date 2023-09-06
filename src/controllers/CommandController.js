@@ -7,9 +7,9 @@ const CommandController = Router()
 
 CommandController.get('/', async (request, response) => {
     try {
-        const command = request.query.command
+        const { command, readYamlFilePath } = request.query
 
-        const result = await CommandBusiness.execute({ command })
+        const result = await CommandBusiness.execute({ command, readYamlFilePath })
 
         return customResponse({ response, code: 200, message: 'Comando executado com sucesso!', data: result })
     } catch (error) {
