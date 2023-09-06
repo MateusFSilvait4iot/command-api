@@ -1,6 +1,6 @@
 import { execSync } from 'child_process'
 import { resolve } from 'path'
-import yaml from 'yaml'
+import yaml from 'js-yaml'
 import fs from 'fs'
 
 class CommandBusiness {
@@ -20,7 +20,7 @@ class CommandBusiness {
 
         if (readYamlFilePath) {
             try {
-                return yaml.parse(fs.readFileSync(resolve(readYamlFilePath), 'utf-8'))
+                return yaml.load(fs.readFileSync(resolve(readYamlFilePath), 'utf-8'))
             } catch (error) {
                 console.log(error)
             }
