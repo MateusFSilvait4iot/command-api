@@ -1,6 +1,7 @@
 import { Router } from 'express'
 import FileBusiness from '../business/FileBusiness.js'
 import customResponse from '../helpers/customResponse.js'
+import upload from '../middlewares/uploader.js'
 
 const FileController = Router()
 
@@ -16,9 +17,10 @@ FileController.get('/read-yaml', async (request, response) => {
     }
 })
 
-FileController.post('/create', async (request, response) => {
+FileController.post('/create', upload.single('file'), async (request, response) => {
     try {
-        const { filePath, file } = request.body
+        const { filePath } = request.body
+        const file = request.file
 
         const result = await FileBusiness.createFile({ filePath, file })
 
