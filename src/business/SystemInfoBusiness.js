@@ -1,6 +1,6 @@
 import os from 'os-utils'
 import disk from 'diskusage'
-import CustomError from '../helpers/customError'
+import CustomError from '../helpers/customError.js'
 
 class SystemInfoBusiness {
     async getInfo({ requestInfo }) {
