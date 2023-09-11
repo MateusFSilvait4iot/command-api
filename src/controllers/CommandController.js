@@ -13,7 +13,7 @@ CommandController.get('/', async (request, response) => {
 
         return customResponse({ response, code: 200, message: 'Comando executado com sucesso!', data: result })
     } catch (error) {
-        return customResponse({ response, code: error?.code, message: error?.message, data: error?.data })
+        return customResponse({ response, code: error.code, message: error.message, data: error.data })
     }
 })
 

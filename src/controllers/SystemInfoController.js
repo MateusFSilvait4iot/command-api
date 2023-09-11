@@ -1,4 +1,7 @@
-import SystemInfoBusiness from "../business/SystemInfoBusiness.js"
+import { Router } from 'express'
+
+import SystemInfoBusiness from '../business/SystemInfoBusiness.js'
+import customResponse from '../helpers/customResponse.js'
 
 const SystemInfoController = Router()
 
@@ -10,7 +13,7 @@ SystemInfoController.get('/', async (request, response) => {
 
         return customResponse({ response, code: 200, message: 'Informação do sistema encontrada com sucesso!', data: result })
     } catch (error) {
-        return customResponse({ response, code: error?.code, message: error?.message, data: error?.data })
+        return customResponse({ response, code: error.code, message: error.message, data: error.data })
     }
 })
 
