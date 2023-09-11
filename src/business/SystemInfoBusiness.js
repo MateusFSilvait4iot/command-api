@@ -1,5 +1,6 @@
 import os from 'os-utils'
 import disk from 'diskusage'
+import CustomError from '../helpers/customError'
 
 class SystemInfoBusiness {
     async getInfo({ requestInfo }) {
@@ -18,19 +19,29 @@ class SystemInfoBusiness {
     }
 
     async getDiskUsage() {
-        return disk.check('/', (err, info) => {
-            const diskFree = info.free / (1024 * 1024 * 1024)
-            const diskTotal = info.total / (1024 * 1024 * 1024)
+        return new Promise(resolve => {
+            disk.check('/', (err, info) => {
+                if (err) throw new CustomError("Erro ao consultar informações do sistema!", 500, err)
 
-            const totalDiskUsagePercent = 100 - (diskFree / diskTotal * 100)
-            return `${totalDiskUsagePercent.toFixed(2)}%`
+                const diskFree = info.free / (1024 * 1024 * 1024)
+                const diskTotal = info.total / (1024 * 1024 * 1024)
+    
+                const totalDiskUsagePercent = 100 - (diskFree / diskTotal * 100)
+                resolve(`${totalDiskUsagePercent.toFixed(2)}%`)
+            })
         })
     }
 
     async getCpuUsage () {
-        return os.cpuUsage(v => {
-            const cpuUsade = v * 100
-            return `${cpuUsade.toFixed(2)}%`
+        return new Promise(resolve => {
+            try {
+                os.cpuUsage(v => {
+                    const cpuUsade = v * 100
+                    resolve(`${cpuUsade.toFixed(2)}%`)
+                })
+            } catch (err) {
+                throw new CustomError("Erro ao consultar informações do sistema!", 500, err)
+            }
         })
     }
 
