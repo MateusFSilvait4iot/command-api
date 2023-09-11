@@ -14,7 +14,7 @@ class FileBusiness {
 
     async createFile({ filePath, file }) {
         try {
-            return fs.writeFileSync(resolve(filePath, file))
+            return fs.writeFileSync(resolve(filePath, file), file, 'utf-8')
         } catch (error) {
             throw new CustomError('Erro ao criar o arquivo!', 400, error)
         }
