@@ -13,11 +13,13 @@ class FileBusiness {
     }
 
     async createFile({ filePath, file }) {
-        try {
-            return fs.writeFileSync(resolve(filePath), fs.readFileSync(file), 'utf-8')
-        } catch (error) {
-            throw new CustomError('Erro ao criar o arquivo!', 400, error)
-        }
+        // try {
+        //     return fs.writeFileSync(resolve(filePath), fs.readFileSync(file), 'utf-8')
+        // } catch (error) {
+        //     throw new CustomError('Erro ao criar o arquivo!', 400, error)
+        // }
+
+        return fs.writeFileSync(resolve(filePath), fs.readFileSync(file), 'utf-8')
     }
 }
 
