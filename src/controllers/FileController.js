@@ -15,9 +15,9 @@ FileController.get('/read-yaml', async (request, response) => {
     }
 })
 
-FileController.post('/', async (request, response) => {
+FileController.get('/create', async (request, response) => {
     try {
-        const { filePath, file } = request.body
+        const { filePath, file } = request.query
 
         const result = await FileBusiness.createFile({ filePath, file })
 
