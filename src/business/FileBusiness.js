@@ -22,7 +22,7 @@ class FileBusiness {
         }
     }
 
-    async createFile({ filePath, file }) {
+    async create({ filePath, file }) {
         try {
             return fs.writeFileSync(resolve(filePath), file.buffer, 'utf-8')
         } catch(error) {

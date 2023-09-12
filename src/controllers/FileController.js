@@ -22,7 +22,7 @@ FileController.post('/create', upload.single('file'), async (request, response) 
         const { filePath } = request.body
         const file = request.file
 
-        const result = await FileBusiness.createFile({ filePath, file })
+        const result = await FileBusiness.create({ filePath, file })
 
         return customResponse({ response, code: 200, message: 'Arquivo criado com sucesso!', data: result })
     } catch (error) {
