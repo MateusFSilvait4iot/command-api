@@ -5,11 +5,11 @@ import upload from '../middlewares/uploader.js'
 
 const FileController = Router()
 
-FileController.get('/read-yaml', async (request, response) => {
+FileController.get('/read', async (request, response) => {
     try {
         const { filePath } = request.query
 
-        const result = await FileBusiness.readYaml({ filePath })
+        const result = await FileBusiness.read({ filePath })
 
         return customResponse({ response, code: 200, message: 'Arquivo encontrado com sucesso!', data: result })
     } catch (error) {

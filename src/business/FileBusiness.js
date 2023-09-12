@@ -3,10 +3,20 @@ import yaml from 'js-yaml'
 import fs from 'fs'
 import CustomError from '../helpers/customError.js'
 
+const yamlExtensions = ['.yaml', '.yml']
+
 class FileBusiness {
-    async readYaml({ filePath }) {
+    async read({ filePath }) {
         try {
-            return yaml.load(fs.readFileSync(resolve(filePath), 'utf-8'))
+            const extenstionFile = filePath.substring(filePath.lastIndexOf('.'))
+            const readFile = fs.readFileSync(resolve(filePath), 'utf-8')
+
+            if (yamlExtensions.includes(extenstionFile)) {
+                return yaml.load(readFile)
+            }
+
+            return readFile
+
         } catch (error) {
             throw new CustomError('Erro ao ler o arquivo!', 400, error)
         }
