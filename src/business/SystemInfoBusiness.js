@@ -15,7 +15,6 @@ class SystemInfoBusiness {
             case 'uptime':
                 return this.getUpTime()
         }
-        
     }
 
     async getDiskUsage() {
